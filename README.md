@@ -22,6 +22,14 @@
 
 ---
 
+## 🌐 Live Application
+
+[![Vercel](https://img.shields.io/badge/Vercel-Live-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://mycelium-wheat.vercel.app)
+
+**Live demo:** https://mycelium-wheat.vercel.app
+
+---
+
 ## ✨ Why MYCELIUM
 
 - **Local-first by design.** Notes, identity and document list never leave your device.

@@ -9,11 +9,12 @@
  * en el repo, pero no se exponen en la UI.
  *
  * Motivo: el "relay" actual usa storage events, que solo funcionan entre
- * pestanas del mismo navegador — nunca entre dos dispositivos reales. Y la
- * clave de recuperacion se trunca a 12 grupos de 4 caracteres, con lo cual es
- * inutilizable para restaurar nada. Reactivar esto requiere transporte real
- * (WebRTC + senalizacion) o un backend, que es el salto de complexity de R5.
+ * pestanas del mismo navegador — nunca entre dos dispositivos reales.
+ * Reactivar esto requiere transporte real (WebRTC + senalizacion) o un backend,
+ * que es el salto de complejidad de la siguiente fase.
  *
- * Para reactivarlo: poner el flag en `true`. No hay que reescribir logica.
+ * Poner el flag en `true` solo expone la UI: NO habilita sincronizacion entre
+ * dispositivos. La recovery key (MYC1) funciona por separado, verificada en
+ * src/lib/recovery-key.test.mts.
  */
 export const PAIRING_ENABLED: boolean = false;

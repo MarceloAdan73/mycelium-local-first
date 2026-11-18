@@ -118,7 +118,7 @@ OFFLINE
 <summary><b>📁 Project structure</b></summary>
 
 ```
-mycelium/
+./
 ├── src/
 │   ├── app/                 # Next.js App Router pages (dashboard, login, register, offline)
 │   ├── components/          # CyberButton, Editor, Logo, MatrixRain, Scanlines, ...
@@ -186,7 +186,7 @@ No `.env` needed — the app is 100% local-first.
 
 The code for QR-based multi-device pairing (`src/lib/qr.ts`, `src/lib/relay.ts`, `QrDisplay`, `QrScanner`) is still in the repo, but it is **not exposed in the UI** (`src/lib/feature-flags.ts` → `PAIRING_ENABLED = false`).
 
-Reason: the current relay uses `storage events`, which only connect tabs of the *same* browser — never two real devices. Re-enabling it requires a real transport (WebRTC + signaling or a backend), which is the R5 step. To show it again, set `PAIRING_ENABLED = true`. No logic needs to be rewritten.
+Reason: the current relay uses `storage events`, which only connect tabs of the *same* browser — never two real devices. Re-enabling it requires a real transport (WebRTC + signaling or a backend). Setting `PAIRING_ENABLED = true` only exposes the UI: it does **not** enable sync between devices.
 
 ---
 
@@ -200,16 +200,15 @@ Runs `src/lib/title.test.mts` and `src/lib/recovery-key.test.mts` with Node's bu
 
 ---
 
-## 🗺️ Roadmap
+## 🗺️ Current scope
 
-| Phase | Status | Scope |
-|-------|--------|-------|
-| R0 | ✅ | Local editor: create / edit / rename / delete + auto-title |
-| R1 | ✅ | Cryptographic identity (Ed25519, no passwords) |
-| R2 | ✅ | Recovery key (export / import) |
-| R3 | ⏸️ | Multi-device pairing by QR (paused — needs real transport) |
-| R4 | ⏳ | Sync & collaboration transport |
-| R5 | ⏳ | Production hardening & deploy |
+| Status | Feature |
+|--------|---------|
+| ✅ | Local editor: create / edit / rename / delete + auto-title |
+| ✅ | Cryptographic identity (Ed25519, no passwords) |
+| ✅ | Recovery key (export / import) |
+| ✅ | Offline support (service worker) |
+| ⏸️ | Multi-device pairing by QR — paused, needs a real transport |
 
 ---
 

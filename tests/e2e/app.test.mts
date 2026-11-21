@@ -168,6 +168,17 @@ test("crear nota -> escribir -> recargar -> contenido intacto", { timeout: 120_0
     const texto = "Nota e2e 0.3\nSegunda linea con contenido persistente.";
     await body.fill(texto);
 
+    // El auto-titulo aparece 600ms despues de escribir; si ya se aplico, los
+    // updates del contenido ya estan commiteados en IndexedDB. Sin esta espera
+    // el reload puede correr antes del commit y borrar el contenido.
+    await page.waitForFunction(
+      (esperado) =>
+        document.querySelector<HTMLInputElement>('input[aria-label="Titulo de la nota"]')
+          ?.value === esperado,
+      "Nota e2e 0.3",
+      { timeout: 10_000 }
+    );
+
     // Ctrl+S limpia el flag dirty para que el reload no dispare beforeunload.
     await page.keyboard.press("Control+s");
     await page.getByText("Guardado (local)").waitFor({ timeout: 10_000 });

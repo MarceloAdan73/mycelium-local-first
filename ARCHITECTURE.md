@@ -71,6 +71,12 @@ crítico; si falla o se demora, el log sigue siendo la fuente.
   compactación chequea que la metadata siga existiendo antes de escribir
   (`compactIfAlive`, `src/lib/doc-content.ts:81`).
 - Migración one-shot desde `y-indexeddb` (ver AD-7).
+- Limitación conocida (detectada por el E2E de 0.3 en CI): el append es
+  fire-and-forget y el indicador "Guardado (local)" solo refleja estado de UI.
+  Si la página se descarga milisegundos después de escribir, el último update
+  puede no llegar a commitear. El flush al desmontar mitiga parcialmente (ese
+  write corre la misma carrera); un flush en `pagehide` sería el cierre
+  robusto — pendiente en 1.5.
 
 ---
 

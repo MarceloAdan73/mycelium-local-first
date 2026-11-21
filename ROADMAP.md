@@ -6,12 +6,13 @@
 
 Versión 0.2.0 · Noviembre 2026 · Documento vivo: actualizar al cerrar cada hito.
 
-> Última revisión: 21/11/2026 — 0.2 cerrado: CI activo en GitHub Actions, primer
-> run verde (lint + tests). El mismo día: 0.5 cerrado (decision log de
-> arquitectura en `ARCHITECTURE.md`, AD-1 a AD-7) y 0.1 cerrado (almacenamiento
-> unificado, migración desde y-indexeddb y verificación E2E automatizada, Edge
-> headless 16/16). 18/11/2026: reordenado tras auditoría técnica + 0.0 cerrado
-> (`.git` recuperado sobre `origin/dev`, rama `dev` activa).
+> Última revisión: 21/11/2026 — 0.3 cerrado: E2E Playwright (identidad+recovery
+> key, persistencia de notas) verde en CI con Chromium headless. El mismo día:
+> 0.2 cerrado (CI activo, primer run verde), 0.5 cerrado (decision log en
+> `ARCHITECTURE.md`, AD-1 a AD-7) y 0.1 cerrado (almacenamiento unificado,
+> migración desde y-indexeddb, smoke E2E 16/16). 18/11/2026: reordenado tras
+> auditoría técnica + 0.0 cerrado (`.git` recuperado sobre `origin/dev`, rama
+> `dev` activa).
 
 > Principio rector: la app es local-first. Cada fase tiene que ser desplegable
 > sola, sin dejar el producto roto a mitad de camino. "Escalar" acá significa
@@ -66,10 +67,15 @@ Playwright se instala recién en 0.3.
   GitHub (`44961377141`, 31s). Nota menor: annotation de deprecation de actions
   @v4 (cosmética, se limpia en 0.4). *Done:* PR que rompa lint o tests no se
   puede mergear.
-- [ ] **0.3** Tests E2E mínimos con Playwright: crear nota → escribir → recargar →
-contenido intacto; crear identidad → exportar clave → importar → mismo usuarioId.
-*Pendiente de autorización de git/CI por Marcelo y de 0.0.* *Done:* corren en
-local/CI en Chromium headless.
+- [x] **0.3 Tests E2E mínimos con Playwright — cerrado 21/11/2026.** Suite
+  `tests/e2e/app.test.mts` (node:test + @playwright/test, Chromium headless):
+  crear identidad → exportar clave → importar → mismo usuarioId; crear nota →
+  escribir → recargar → contenido intacto. Levanta solo `next build` +
+  `next start` (puerto 3210); script `pnpm test:e2e`; job `e2e` en CI con
+  Chromium. Run verde en GitHub: `44962662168` (job e2e 48s). Aprendizaje: el
+  "Guardado (local)" es estado de UI, no garantía de durabilidad — el test
+  espera el auto-título antes de recargar (ver AD-2 de `ARCHITECTURE.md` y 1.5).
+  *Done:* corren en local/CI en Chromium headless.
 - [ ] **0.4** Hook de pre-commit (lint-staged + eslint --fix) para que el repo
 no acumule warnings. *Pendiente de autorización de git por Marcelo y de 0.0.*
 
@@ -97,7 +103,10 @@ sidebar (hoy solo doble click, no es descubrible). Doble click sigue
 funcionando.
 - [ ] **1.5 Detalles de UX.** Contador de notas en el sidebar, orden por
 última edición (ya está por updated_at; verificar que el editor lo
-actualice al escribir), indicador de guardado más claro.
+actualice al escribir), indicador de guardado más claro. El indicador actual
+no garantiza durabilidad: recargar en los milisegundos posteriores a escribir
+puede perder el último update (detectado por el E2E en CI); evaluar flush en
+`pagehide` (ver AD-2).
 - [ ] **1.6 Escritura incremental del Y.Text.** Hoy `Editor.tsx` reemplaza todo
 el texto en cada tecla (`delete(0, len)` + `insert(0, value)`): funciona para una
 persona, pero produce merges feos. Pasar a operaciones incrementales. No bloquea

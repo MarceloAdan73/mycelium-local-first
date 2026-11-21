@@ -5,13 +5,13 @@
 
 <!-- ORQUESTADOR v1 - lo mantiene el agente de esta area; el central SOLO lo lee -->
 ## ORQUESTADOR - estado para el agente central
-**Actualizado**: 21/11/2026 23:22 - **Estado**: EN DESARROLLO (0.2 CERRADO: CI verde en GitHub, run `44961377141` 31s, pusheado; 0.5 cerrado `22b3e0d` + workflow `0125b0d`, ambos en `origin/dev`; 0.1 cerrado antes; ediciones de docs del cierre 0.2 sin commitear)
-**Ultimo hito cerrado**: 21/11/2026 - 0.2 del ROADMAP: CI en GitHub Actions. `.github/workflows/ci.yml` (pnpm 11 + Node 24, `pnpm install --frozen-lockfile`) corre `pnpm lint` + `pnpm test` en push/PR a `dev` y `main`. Primer run verde en GitHub: `44961377141`, 31s. Annotation menor de deprecation de actions @v4 (cosmética, se limpia en 0.4). Antes en la misma sesion: 0.5 cerrado (`ARCHITECTURE.md`, AD-1 a AD-7, commit `22b3e0d`).
-**Proximo hito**: 0.3 E2E Playwright (crear nota → escribir → recargar → intacto; crear identidad → exportar clave → importar → mismo usuarioId) → 0.4 pre-commit → Fase 1 (busqueda full-text, exportacion, preview Markdown).
+**Actualizado**: 21/11/2026 20:42 - **Estado**: EN DESARROLLO (0.3 CERRADO: E2E verde en GitHub run `44962662168`, pusheado `08f17e6`; FASE 0 completa salvo 0.4 pre-commit; 0.2 cerrado `44961377141`; 0.5 cerrado `22b3e0d`; cierre de docs 0.3 + orquestador committeados a `dev` sin pushear; sesion cerrada 20:42)
+**Ultimo hito cerrado**: 21/11/2026 - 0.3 del ROADMAP: E2E Playwright. Suite `tests/e2e/app.test.mts` (node:test + @playwright/test, Chromium headless): crear identidad → exportar clave → importar → mismo usuarioId; crear nota → escribir → recargar → intacto. Levanta solo `next build` + `next start -p 3210`; script `pnpm test:e2e`; job `e2e` en CI. Run verde `44962662168` (e2e 48s + lint-test 25s). Aprendizaje: "Guardado (local)" no garantiza durabilidad (race reload vs commit de IDB, documentada en AD-2 y ROADMAP 1.5); el test espera el auto-titulo antes de recargar. Swap `playwright-core` → `@playwright/test`.
+**Proximo hito**: Marcelo prueba 0.1+0.3 en local ANTES de mergear a `main` (checklist: migracion de notas viejas de localhost, crear/escribir/recargar, renombrar, borrar, import de recovery key) → luego 0.4 pre-commit (lint-staged + eslint --fix, el ultimo de Fase 0) → recien ahi evaluar merge de Fase 0 a `main` → Fase 1 (busqueda full-text, exportacion, preview Markdown).
 **Vencimientos**: NINGUNO - sin fecha ni evento externo.
-**Espera de Marcelo**: autorizar 0.3 y/o 0.4, o elegir Fase 1; commitear las ediciones de ROADMAP/AGENTS del cierre 0.2 (pendiente de visto). `opencode.json` y `generar-transcripcion/` siguen sin trackear (decision: no se versionan).
-**No hacer**: no poner `PAIRING_ENABLED = true`; no relajar gate de la recovery key; no trabajar ni commitear en `main`; no mergear a `main` sin fase completa; no pushear sin pedido explicito; no deploy a Vercel sin autorizacion.
-**Me falta confirmar**: si commitear las ediciones de docs del cierre 0.2 y que hito arrancar despues (0.3/0.4 vs Fase 1).
+**Espera de Marcelo**: que pruebe en local (`pnpm dev` en localhost:3000, navegador donde uso Mycelium antes) y reporte resultado; elegir si arrancar 0.4 o Fase 1 mientras; visto para pushear los commits de docs pendientes (0.3 cierre + orquestador). `opencode.json` y `generar-transcripcion/` siguen sin trackear (decision: no se versionan).
+**No hacer**: NO mergear a `main` ni pushear `main` sin la prueba local de Marcelo OK + autorizacion explicita; no poner `PAIRING_ENABLED = true`; no relajar gate de la recovery key; no trabajar ni commitear en `main`; no pushear sin pedido explicito; no deploy a Vercel sin autorizacion.
+**Me falta confirmar**: resultado de la prueba local de Marcelo; si arrancar 0.4 o Fase 1 mientras; si pushear los docs pendientes a `origin/dev`.
 <!-- FIN ORQUESTADOR -->
 
 ## 🛡️ GUARDIÁN DE TOKENS (Reglas de Eficiencia)

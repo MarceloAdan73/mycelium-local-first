@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useCallback, useState } from "react";
 import * as Y from "yjs";
-import { IndexeddbPersistence } from "y-indexeddb";
 import { renameDoc } from "@/lib/docs";
+import { loadDocContent, watchDocContent } from "@/lib/doc-content";
 import { DEFAULT_DOC_TITLE, deriveTitleFromContent } from "@/lib/title";
 
 /** Mismo debounce que usa el rename del sidebar (dashboard/page.tsx). */
@@ -58,9 +58,12 @@ export default function Editor({ docId, docName, onNameChange, onDirtyChange }: 
   useEffect(() => {
     const ydoc = new Y.Doc();
     ydocRef.current = ydoc;
-    const persistence = new IndexeddbPersistence(docId, ydoc);
+    let disposed = false;
+    let stopPersist: (() => void) | null = null;
 
-    persistence.on("synced", () => {
+    loadDocContent(docId, ydoc).then(() => {
+      if (disposed) return;
+      stopPersist = watchDocContent(docId, ydoc);
       setReady(true);
       const ytext = ydoc.getText("content");
       setContent(ytext.toString());
@@ -77,8 +80,9 @@ export default function Editor({ docId, docName, onNameChange, onDirtyChange }: 
     });
 
     return () => {
+      disposed = true;
       if (autoTitleDebounceRef.current) clearTimeout(autoTitleDebounceRef.current);
-      persistence.destroy();
+      if (stopPersist) stopPersist();
       ydoc.destroy();
     };
   }, [docId]);

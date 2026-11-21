@@ -6,11 +6,12 @@
 
 Versión 0.2.0 · Noviembre 2026 · Documento vivo: actualizar al cerrar cada hito.
 
-> Última revisión: 21/11/2026 — 0.5 cerrado: decision log de arquitectura en
-> `ARCHITECTURE.md` (AD-1 a AD-7). Antes, el mismo día: 0.1 cerrado
-> (almacenamiento unificado, migración desde y-indexeddb y verificación E2E
-> automatizada, Edge headless 16/16). 18/11/2026: reordenado tras auditoría
-> técnica + 0.0 cerrado (`.git` recuperado sobre `origin/dev`, rama `dev` activa).
+> Última revisión: 21/11/2026 — 0.2 cerrado: CI activo en GitHub Actions, primer
+> run verde (lint + tests). El mismo día: 0.5 cerrado (decision log de
+> arquitectura en `ARCHITECTURE.md`, AD-1 a AD-7) y 0.1 cerrado (almacenamiento
+> unificado, migración desde y-indexeddb y verificación E2E automatizada, Edge
+> headless 16/16). 18/11/2026: reordenado tras auditoría técnica + 0.0 cerrado
+> (`.git` recuperado sobre `origin/dev`, rama `dev` activa).
 
 > Principio rector: la app es local-first. Cada fase tiene que ser desplegable
 > sola, sin dejar el producto roto a mitad de camino. "Escalar" acá significa
@@ -59,9 +60,12 @@ Playwright se instala recién en 0.3.
   aceptadas y migración one-shot. Va antes que 0.2/0.3: es barato y fija qué
   testear. *Done:* el decision log existe y el resto del roadmap referencia sus
   decisiones (ver "Fuentes de verdad" arriba).
-- [ ] **0.2** Correr linter + tests en CI (GitHub Actions): `pnpm lint` + `pnpm test`.
-*Pendiente de autorización de git/CI por Marcelo y de 0.0.* *Done:* PR que rompa
-lint o tests no se puede mergear.
+- [x] **0.2 Correr linter + tests en CI — cerrado 21/11/2026.** Workflow
+  `.github/workflows/ci.yml` (pnpm 11 + Node 24, lockfile congelado) corre
+  `pnpm lint` + `pnpm test` en push/PR a `dev` y `main`. Primer run verde en
+  GitHub (`44961377141`, 31s). Nota menor: annotation de deprecation de actions
+  @v4 (cosmética, se limpia en 0.4). *Done:* PR que rompa lint o tests no se
+  puede mergear.
 - [ ] **0.3** Tests E2E mínimos con Playwright: crear nota → escribir → recargar →
 contenido intacto; crear identidad → exportar clave → importar → mismo usuarioId.
 *Pendiente de autorización de git/CI por Marcelo y de 0.0.* *Done:* corren en

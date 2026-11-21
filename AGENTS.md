@@ -5,7 +5,7 @@
 
 <!-- ORQUESTADOR v1 - lo mantiene el agente de esta area; el central SOLO lo lee -->
 ## ORQUESTADOR - estado para el agente central
-**Actualizado**: 21/11/2026 16:32 - **Estado**: EN DESARROLLO (0.1 cerrado; commits pusheados a `origin/dev`; ROADMAP.md y AGENTS.md versionados en `dev`)
+**Actualizado**: 21/11/2026 17:31 - **Estado**: EN DESARROLLO (0.1 cerrado; commits pusheados a `origin/dev`; ROADMAP.md y AGENTS.md versionados en `dev`; sesion cerrada a las 17:31, la proxima sesion arranca con 0.5)
 **Ultimo hito cerrado**: 21/11/2026 - 0.1 del ROADMAP: almacenamiento unificado. La DB `mycelium-docs` (v2) guarda metadata + contenido en una sola base: store `docs` + store `content` (log de updates de Yjs, append inmediato + compactacion en snapshot). Migracion one-shot por nota desde las DB de y-indexeddb (se borran al migrar); dependencia `y-indexeddb` removida; guard contra content huerfano al borrar con editor montado. Verificado: `pnpm lint` limpio, `pnpm test` 18/18, `pnpm build` OK y smoke E2E automatizado en Edge headless con playwright-core 16/16 (crear→escribir→recargar→intacto, borrado limpio, migracion legacy). `playwright-core` quedo como devDependency (base para 0.3).
 **Proximo hito**: 0.5 `ARCHITECTURE.md` (decision log: IDB unificada para docs, localStorage para identidad/flags, formato del store content, limitaciones multi-pestana conocidas) → 0.2 CI, 0.3 E2E Playwright, 0.4 pre-commit (requieren autorizacion explicita de git/CI) → Fase 1 (busqueda full-text, exportacion, preview Markdown).
 **Vencimientos**: NINGUNO - sin fecha ni evento externo.

@@ -1,11 +1,16 @@
 # MYCELIUM — Roadmap de escalamiento
 
+> **Fuentes de verdad:** roadmap y fases en este archivo; decisiones de
+> arquitectura vigentes en `ARCHITECTURE.md` (AD-1 a AD-7). Ante duda sobre el
+> estado real, verificar el código antes de afirmar.
+
 Versión 0.2.0 · Noviembre 2026 · Documento vivo: actualizar al cerrar cada hito.
 
-> Última revisión: 21/11/2026 — 0.1 cerrado: almacenamiento unificado, migración
-> desde y-indexeddb y verificación E2E automatizada (Edge headless 16/16).
-> 18/11/2026: reordenado tras auditoría técnica + 0.0 cerrado (`.git`
-> recuperado sobre `origin/dev`, rama `dev` activa).
+> Última revisión: 21/11/2026 — 0.5 cerrado: decision log de arquitectura en
+> `ARCHITECTURE.md` (AD-1 a AD-7). Antes, el mismo día: 0.1 cerrado
+> (almacenamiento unificado, migración desde y-indexeddb y verificación E2E
+> automatizada, Edge headless 16/16). 18/11/2026: reordenado tras auditoría
+> técnica + 0.0 cerrado (`.git` recuperado sobre `origin/dev`, rama `dev` activa).
 
 > Principio rector: la app es local-first. Cada fase tiene que ser desplegable
 > sola, sin dejar el producto roto a mitad de camino. "Escalar" acá significa
@@ -47,10 +52,13 @@ Playwright se instala recién en 0.3.
   content huérfano. *Verificado:* lint limpio, tests 18/18, build OK y smoke
   E2E automatizado en Edge headless 16/16 (crear → escribir → recargar →
   intacto; borrar metadata + content; migrar nota legacy).
-- [ ] **0.5 Decisiones de arquitectura en `ARCHITECTURE.md`** (por qué IDB para
-docs, localStorage solo para identidad/flags, qué pasa con PAIRING y cómo se
-guarda el contenido de Yjs). Va antes que 0.2/0.3: es barato y fija qué testear.
-*Done:* el decision log existe y el resto del roadmap referencia sus decisiones.
+- [x] **0.5 Decisiones de arquitectura en `ARCHITECTURE.md` — cerrado 21/11/2026.**
+  Decision log con 7 decisiones (AD-1 a AD-7): IDB unificada para docs,
+  localStorage solo para identidad/flags, log de updates de Yjs con append
+  inmediato + compactación, PAIRING en pausa, limitaciones multi-pestana
+  aceptadas y migración one-shot. Va antes que 0.2/0.3: es barato y fija qué
+  testear. *Done:* el decision log existe y el resto del roadmap referencia sus
+  decisiones (ver "Fuentes de verdad" arriba).
 - [ ] **0.2** Correr linter + tests en CI (GitHub Actions): `pnpm lint` + `pnpm test`.
 *Pendiente de autorización de git/CI por Marcelo y de 0.0.* *Done:* PR que rompa
 lint o tests no se puede mergear.

@@ -5,13 +5,13 @@
 
 <!-- ORQUESTADOR v1 - lo mantiene el agente de esta area; el central SOLO lo lee -->
 ## ORQUESTADOR - estado para el agente central
-**Actualizado**: 21/11/2026 17:31 - **Estado**: EN DESARROLLO (0.1 cerrado; commits pusheados a `origin/dev`; ROADMAP.md y AGENTS.md versionados en `dev`; sesion cerrada a las 17:31, la proxima sesion arranca con 0.5)
-**Ultimo hito cerrado**: 21/11/2026 - 0.1 del ROADMAP: almacenamiento unificado. La DB `mycelium-docs` (v2) guarda metadata + contenido en una sola base: store `docs` + store `content` (log de updates de Yjs, append inmediato + compactacion en snapshot). Migracion one-shot por nota desde las DB de y-indexeddb (se borran al migrar); dependencia `y-indexeddb` removida; guard contra content huerfano al borrar con editor montado. Verificado: `pnpm lint` limpio, `pnpm test` 18/18, `pnpm build` OK y smoke E2E automatizado en Edge headless con playwright-core 16/16 (crear→escribir→recargar→intacto, borrado limpio, migracion legacy). `playwright-core` quedo como devDependency (base para 0.3).
-**Proximo hito**: 0.5 `ARCHITECTURE.md` (decision log: IDB unificada para docs, localStorage para identidad/flags, formato del store content, limitaciones multi-pestana conocidas) → 0.2 CI, 0.3 E2E Playwright, 0.4 pre-commit (requieren autorizacion explicita de git/CI) → Fase 1 (busqueda full-text, exportacion, preview Markdown).
+**Actualizado**: 21/11/2026 20:10 - **Estado**: EN DESARROLLO (0.5 cerrado en esta sesion, sin commitear todavia; 0.1 cerrado y pusheado antes; ROADMAP.md actualizado con 0.5 y referencias a `ARCHITECTURE.md`)
+**Ultimo hito cerrado**: 21/11/2026 - 0.5 del ROADMAP: decision log de arquitectura en `ARCHITECTURE.md` (AD-1 a AD-7): IDB unificada `mycelium-docs` v2 para docs (AD-1), contenido Yjs como log de updates con append inmediato + compactacion (AD-2), localStorage solo para identidad/flags/relay (AD-3), identidad Ed25519 JWK + recovery key MYC1 (AD-4), PAIRING en pausa (AD-5), limitaciones multi-pestana aceptadas (AD-6), migracion one-shot (AD-7). ROADMAP.md referencia `ARCHITECTURE.md` como fuente de verdad. Doc-only: no toco codigo, sin verificacion de lint/tests necesaria.
+**Proximo hito**: 0.2 CI (GitHub Actions: `pnpm lint` + `pnpm test`) → 0.3 E2E Playwright → 0.4 pre-commit (los tres requieren autorizacion explicita de git/CI) → Fase 1 (busqueda full-text, exportacion, preview Markdown).
 **Vencimientos**: NINGUNO - sin fecha ni evento externo.
-**Espera de Marcelo**: autorizar CI/pre-commit/E2E y definir que arrancar despues de 0.5. `opencode.json` y `generar-transcripcion/` siguen sin trackear (decision: no se versionan).
+**Espera de Marcelo**: pendiente commitear los cambios de 0.5 (ARCHITECTURE.md nuevo + ROADMAP.md/AGENTS.md editados, solo en `dev`); autorizar CI/pre-commit/E2E y definir que arrancar despues (0.2/0.3/0.4 vs Fase 1). `opencode.json` y `generar-transcripcion/` siguen sin trackear (decision: no se versionan).
 **No hacer**: no poner `PAIRING_ENABLED = true`; no relajar gate de la recovery key; no trabajar ni commitear en `main`; no mergear a `main` sin fase completa; no pushear sin pedido explicito; no deploy a Vercel sin autorizacion.
-**Me falta confirmar**: que hito arrancar tras cerrar 0.5 (0.2/0.3/0.4 vs Fase 1).
+**Me falta confirmar**: si commitear ya los cambios de 0.5 a `dev` y que hito arrancar despues (0.2/0.3/0.4 vs Fase 1).
 <!-- FIN ORQUESTADOR -->
 
 ## 🛡️ GUARDIÁN DE TOKENS (Reglas de Eficiencia)

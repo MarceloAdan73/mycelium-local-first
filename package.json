@@ -8,7 +8,11 @@
     "start": "next start",
     "lint": "eslint",
     "test": "node --test src/lib/title.test.mts src/lib/recovery-key.test.mts",
-    "test:e2e": "node --test \"tests/e2e/*.test.mts\""
+    "test:e2e": "node --test \"tests/e2e/*.test.mts\"",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,mts,mjs,cjs,js}": ["eslint --fix"]
   },
   "dependencies": {
     "framer-motion": "^12.43.0",
@@ -29,6 +33,8 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.7",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   },

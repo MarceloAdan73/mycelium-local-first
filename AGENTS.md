@@ -5,13 +5,13 @@
 
 <!-- ORQUESTADOR v1 - lo mantiene el agente de esta area; el central SOLO lo lee -->
 ## ORQUESTADOR - estado para el agente central
-**Actualizado**: 21/11/2026 20:42 - **Estado**: FASE 0 COMPLETA (0.4 cerrado en esta sesion, `10797ce`; 0.3 cerrado run verde `44962662168` `08f17e6`; 0.2 `44961377141`; 0.5 `22b3e0d`; 0.1 `368d07e`; prueba local de Marcelo OK + doble verificacion automatizada; commits de cierre docs 0.3 `4a07cb9` + 0.4 cierre sin pushear)
-**Ultimo hito cerrado**: 21/11/2026 - 0.4 del ROADMAP: pre-commit. husky 9 + lint-staged 17, `.husky/pre-commit` corre `pnpm exec lint-staged` → `eslint --fix` sobre `*.{ts,tsx,mts,mjs,cjs,js}` staged; errores no autofixables bloquean el commit; se reinstala solo con `pnpm install` (script `prepare`). Validado con archivo staged real + commits reales. Con esto FASE 0 completa: 0.0-0.5.
-**Proximo hito**: merge Fase 0 a `main` (requiere autorizacion explicita de Marcelo; `main` esta 10+ commits atras: unificacion de storage + CI + E2E + docs) → Fase 1 (1.1 busqueda full-text Ctrl+K, 1.2 exportacion, 1.3 preview Markdown, 1.4 renombrar sin doble click, 1.5 UX guardado incl. flush en pagehide, 1.6 escritura incremental Y.Text).
+**Actualizado**: 21/11/2026 21:05 - **Estado**: FASE 0 MERGEADA A `main` Y PUSHEADA (merge `c096817`, CI verde en `main` run `44964845405`: e2e 50s + lint-test 30s; Vercel publica `main`). Sesion cerrada 21:05. Dev completa y pusheada.
+**Ultimo hito cerrado**: 21/11/2026 - CIERRE DE FASE 0 (0.0-0.5): merge `--no-ff` de `dev` a `main` autorizado por Marcelo tras su prueba local OK + verificacion doble (suite E2E prod 2/2 + sonda sobre dev server 2/2). Fase 0 incluye: toolchain recuperada, storage unificado con migracion, CI (lint+tests), E2E Playwright, pre-commit husky+lint-staged, decision log ARCHITECTURE.md.
+**Proximo hito**: Fase 1 (producto): 1.1 busqueda full-text Ctrl+K (la mas pesada, hace falta decidir indice en memoria), 1.2 exportacion MD/txt + zip, 1.3 preview Markdown, 1.4 renombrar sin doble click, 1.5 UX guardado (incl. flush en pagehide por la race detectada en 0.3), 1.6 escritura incremental Y.Text.
 **Vencimientos**: NINGUNO - sin fecha ni evento externo.
-**Espera de Marcelo**: autorizar merge de Fase 0 a `main` y pusheo (`main` toca Vercel, requiere visto explicito); o elegir arrancar Fase 1 mientras; visto para pushear commits pendientes a `origin/dev` (`4a07cb9`, `10797ce` + cierre). Annotation actions @v4 sigue pendiente (cosmetica).
-**No hacer**: NO mergear a `main` ni pushear `main` sin autorizacion explicita; no poner `PAIRING_ENABLED = true`; no relajar gate de la recovery key; no trabajar ni commitear en `main`; no pushear sin pedido explicito; no deploy a Vercel sin autorizacion.
-**Me falta confirmar**: si Marcelo autoriza el merge a `main` de la Fase 0, si pushear los pendientes a `origin/dev`, y si arrancar Fase 1.
+**Espera de Marcelo**: nada bloqueante; arrancar Fase 1 cuando abra la proxima sesion. Annotation actions @v4 sigue pendiente (cosmetica). `opencode.json` y `generar-transcripcion/` siguen sin trackear (decision: no se versionan).
+**No hacer**: no poner `PAIRING_ENABLED = true`; no relajar gate de la recovery key; no trabajar ni commitear en `main` (merges de fase completa con autorizacion); no pushear sin pedido explicito; no deploy a Vercel manual sin autorizacion (main ya despliega automatico).
+**Me falta confirmar**: nada; proxima sesion arranca con Fase 1 (preguntar por donde: 1.1 vs 1.4/1.5 rapidos).
 <!-- FIN ORQUESTADOR -->
 
 ## 🛡️ GUARDIÁN DE TOKENS (Reglas de Eficiencia)

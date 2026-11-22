@@ -6,13 +6,13 @@
 
 Versión 0.2.0 · Noviembre 2026 · Documento vivo: actualizar al cerrar cada hito.
 
-> Última revisión: 21/11/2026 — 0.3 cerrado: E2E Playwright (identidad+recovery
-> key, persistencia de notas) verde en CI con Chromium headless. El mismo día:
-> 0.2 cerrado (CI activo, primer run verde), 0.5 cerrado (decision log en
-> `ARCHITECTURE.md`, AD-1 a AD-7) y 0.1 cerrado (almacenamiento unificado,
-> migración desde y-indexeddb, smoke E2E 16/16). 18/11/2026: reordenado tras
-> auditoría técnica + 0.0 cerrado (`.git` recuperado sobre `origin/dev`, rama
-> `dev` activa).
+> Última revisión: 21/11/2026 — **FASE 0 COMPLETA** (0.0, 0.1, 0.2, 0.3, 0.4 y
+> 0.5 cerrados; prueba local de Marcelo OK). Pendiente: merge a `main` con
+> autorización explícita → Fase 1. Detalle: 0.3 E2E Playwright verde en CI
+> (run `44962662168`), 0.2 CI activo, 0.5 decision log en `ARCHITECTURE.md`
+> (AD-1 a AD-7), 0.1 almacenamiento unificado con migración desde y-indexeddb.
+> 18/11/2026: reordenado tras auditoría técnica + 0.0 cerrado (`.git`
+> recuperado sobre `origin/dev`, rama `dev` activa).
 
 > Principio rector: la app es local-first. Cada fase tiene que ser desplegable
 > sola, sin dejar el producto roto a mitad de camino. "Escalar" acá significa
@@ -76,8 +76,13 @@ Playwright se instala recién en 0.3.
   "Guardado (local)" es estado de UI, no garantía de durabilidad — el test
   espera el auto-título antes de recargar (ver AD-2 de `ARCHITECTURE.md` y 1.5).
   *Done:* corren en local/CI en Chromium headless.
-- [ ] **0.4** Hook de pre-commit (lint-staged + eslint --fix) para que el repo
-no acumule warnings. *Pendiente de autorización de git por Marcelo y de 0.0.*
+- [x] **0.4 Hook de pre-commit — cerrado 21/11/2026.** husky 9 + lint-staged 17:
+  `.husky/pre-commit` corre `pnpm exec lint-staged`, que ejecuta `eslint --fix`
+  sobre los archivos de código commiteados (`*.{ts,tsx,mts,mjs,cjs,js}`); los
+  errores no autofixables bloquean el commit. El hook se reinstala solo con
+  `pnpm install` (script `prepare`). *Validado:* lint-staged sobre un archivo
+  staged (eslint --fix corre) y hook disparado en commits reales. *Done:* el
+  repo no acumula warnings. **Con esto la FASE 0 queda completa.**
 
 **Estimación:** 1–2 semanas si la toolchain se recupera rápido; +3–5 días si hay
 que reconstruir configs. · **Riesgo:** bajo-medio (0.0 es el único punto duro).
